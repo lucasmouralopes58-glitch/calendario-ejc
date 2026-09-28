@@ -115,6 +115,17 @@ export default function Home() {
     setMostrarFormulario(false);
   }
 
+  function compartilharWhatsApp() {
+    const mensagem =
+      "📅 *Calendário EJC*\n\n" +
+      "Confira os próximos eventos e tudo que acontece no EJC:\n\n" +
+      window.location.href;
+
+    const url = `https://wa.me/?text=${encodeURIComponent(mensagem)}`;
+
+    window.open(url, "_blank");
+  }
+
   function limparFormulario() {
     setTitulo("");
     setData("");
@@ -268,12 +279,6 @@ export default function Home() {
     return new Date(anoAtual, mesAtual, 1).getDay();
   }
 
-  function formatarData(dataString: string) {
-    const [ano, mes, dia] = dataString.split("-");
-
-    return `${dia}/${mes}/${ano}`;
-  }
-
   function eventosDoDia(dia: number) {
     const dataFormatada = `${anoAtual}-${String(mesAtual + 1).padStart(
       2,
@@ -297,9 +302,7 @@ export default function Home() {
   const dias = [];
 
   for (let i = 0; i < primeiroDiaDoMes(); i++) {
-    dias.push(
-      <div className="dia vazio" key={`vazio-${i}`} />
-    );
+    dias.push(<div className="dia vazio" key={`vazio-${i}`} />);
   }
 
   for (let dia = 1; dia <= diasNoMes(); dia++) {
@@ -350,6 +353,13 @@ export default function Home() {
             </div>
 
             <div className="acoesHeader">
+              <button
+                onClick={compartilharWhatsApp}
+                className="btn btnWhatsApp"
+              >
+                📲 <span>Compartilhar</span>
+              </button>
+
               {usuario ? (
                 <>
                   <button
@@ -405,7 +415,10 @@ export default function Home() {
               />
 
               <div className="botoesFormulario">
-                <button onClick={entrar} className="btn btnPrincipal">
+                <button
+                  onClick={entrar}
+                  className="btn btnPrincipal"
+                >
                   Entrar
                 </button>
 
@@ -675,6 +688,8 @@ export default function Home() {
         .acoesHeader {
           display: flex;
           gap: 8px;
+          flex-wrap: wrap;
+          justify-content: flex-end;
         }
 
         .btn {
@@ -696,6 +711,12 @@ export default function Home() {
           background: white;
           color: #334155;
           border: 1px solid #e2e8f0;
+        }
+
+        .btnWhatsApp {
+          background: #25d366;
+          color: white;
+          box-shadow: 0 5px 15px rgba(37, 211, 102, 0.18);
         }
 
         .painel {
@@ -1036,6 +1057,7 @@ export default function Home() {
 
           .acoesHeader {
             width: 100%;
+            justify-content: stretch;
           }
 
           .acoesHeader .btn {
