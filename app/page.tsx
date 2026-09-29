@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "../supabase";
-
 type Evento = {
   id: number;
   titulo: string;
