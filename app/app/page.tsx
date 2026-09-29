@@ -61,7 +61,6 @@ export default function Home() {
 
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const [manterConectado, setManterConectado] = useState(true);
 
   const [titulo, setTitulo] = useState("");
   const [data, setData] = useState("");
@@ -95,15 +94,7 @@ export default function Home() {
       data: { user },
     } = await supabase.auth.getUser();
 
-    const lembrar = localStorage.getItem("ejc_manter_conectado");
-
-    if (user && lembrar === "false") {
-      await supabase.auth.signOut();
-      setUsuario(null);
-    } else {
-      setUsuario(user);
-    }
-
+    setUsuario(user);
     setCarregandoUsuario(false);
   }
 
@@ -123,11 +114,6 @@ export default function Home() {
       console.error(error);
       return;
     }
-
-    localStorage.setItem(
-      "ejc_manter_conectado",
-      manterConectado ? "true" : "false"
-    );
 
     setMostrarLogin(false);
     setEmail("");
@@ -345,104 +331,34 @@ export default function Home() {
     <main className="page">
 
       {/* =========================
-          DECORAÇÕES DOURADAS
+          DECORAÇÕES DOURADAS — estilo da arte de demonstração
       ========================= */}
 
-      <div className="decor decorTopLeft">
-        <svg viewBox="0 0 300 360">
-          <g
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.4"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M15 315 C45 250, 35 190, 80 135 C110 98, 150 78, 182 52" />
-            <path d="M65 246 C43 214, 28 181, 32 143" />
-            <path d="M90 206 C120 178, 138 151, 151 119" />
+      <div className="ejcDecorations" aria-hidden="true">
+        <img
+          src="/ejc-decor/top-left.png"
+          className="ejcDecor ejcDecorTopLeft"
+          alt=""
+        />
 
-            <path d="M76 157 C44 141, 26 115, 27 91 C28 66, 50 53, 70 63 C90 73, 94 96, 82 116" />
-            <path d="M78 157 C110 141, 130 114, 128 89 C126 64, 104 52, 84 63 C65 74, 63 98, 75 117" />
+        <img
+          src="/ejc-decor/top-right.png"
+          className="ejcDecor ejcDecorTopRight"
+          alt=""
+        />
 
-            <path d="M76 157 C60 136, 60 110, 76 97 C91 84, 111 91, 116 108 C121 126, 104 145, 76 157" />
+        <img
+          src="/ejc-decor/bottom-left.png"
+          className="ejcDecor ejcDecorBottomLeft"
+          alt=""
+        />
 
-            <path d="M65 246 C37 235, 18 218, 13 198 C35 193, 57 204, 65 246" />
-            <path d="M89 206 C111 205, 132 192, 142 174 C118 169, 98 180, 89 206" />
-          </g>
-        </svg>
+        <img
+          src="/ejc-decor/bottom-right.png"
+          className="ejcDecor ejcDecorBottomRight"
+          alt=""
+        />
       </div>
-
-      <div className="decor decorTopRight">
-        <svg viewBox="0 0 260 240">
-          <g
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.35"
-            strokeLinecap="round"
-          >
-            <path d="M245 20 C205 50, 188 90, 184 135 C181 168, 192 196, 217 218" />
-            <path d="M210 73 C190 65, 172 67, 160 79 C178 91, 196 90, 210 73" />
-            <path d="M190 133 C210 121, 226 122, 239 135 C220 148, 202 147, 190 133" />
-            <path d="M183 176 C163 165, 146 168, 135 182 C153 192, 171 190, 183 176" />
-
-            <path d="M216 54 C225 48, 236 50, 240 59 C244 68, 238 77, 229 81 C221 75, 216 65, 216 54Z" />
-          </g>
-        </svg>
-      </div>
-
-      <div className="decor decorBottomLeft">
-        <svg viewBox="0 0 260 300">
-          <g
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.25"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M18 285 C42 246, 68 223, 74 183 C79 151, 66 124, 39 104" />
-            <path d="M74 183 C104 167, 125 142, 130 111" />
-            <path d="M57 221 C36 211, 20 194, 18 174 C39 174, 56 192, 57 221" />
-            <path d="M88 162 C108 160, 125 149, 136 131 C115 127, 97 138, 88 162" />
-
-            <path d="M47 76 C48 52, 62 34, 80 29 C84 51, 72 69, 47 76" />
-            <path d="M47 76 C27 68, 15 53, 15 37 C32 39, 46 53, 47 76" />
-          </g>
-        </svg>
-      </div>
-
-      <div className="decor decorBottomRight">
-        <svg viewBox="0 0 300 340">
-          <g
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.4"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M285 330 C258 285, 248 247, 259 205 C270 162, 252 124, 215 95" />
-
-            <path d="M252 244 C226 229, 208 205, 207 179 C231 183, 250 204, 252 244" />
-
-            <path d="M257 205 C281 190, 293 166, 289 143 C268 148, 255 172, 257 205" />
-
-            <path d="M215 95 C190 82, 174 59, 176 36 C198 41, 215 63, 215 95" />
-
-            <path d="M216 95 C239 85, 252 64, 250 43 C229 48, 216 68, 216 95" />
-
-            <path d="M195 137 C207 125, 209 109, 203 97 C190 107, 187 123, 195 137" />
-
-            <path d="M207 179 C188 166, 172 165, 159 176 C176 188, 193 188, 207 179" />
-          </g>
-        </svg>
-      </div>
-
-      {/* pequenos brilhos */}
-
-      <span className="goldStar star1">✦</span>
-      <span className="goldStar star2">✦</span>
-      <span className="goldStar star3">✦</span>
-      <span className="goldStar star4">✦</span>
-      <span className="goldStar star5">✦</span>
 
       {/* =========================
           CONTEÚDO
@@ -517,7 +433,7 @@ export default function Home() {
                 className="outlineButton"
                 onClick={() => setMostrarLogin(true)}
               >
-                ♟ Acesso dos CGs
+                ♟ Área da equipe
               </button>
             )}
 
@@ -872,7 +788,7 @@ export default function Home() {
             </span>
 
             <h2>
-              Acesso dos CGs
+              Área da equipe
             </h2>
 
             <p>
@@ -901,17 +817,6 @@ export default function Home() {
                 }
               }}
             />
-
-            <label className="rememberLogin">
-              <input
-                type="checkbox"
-                checked={manterConectado}
-                onChange={(e) =>
-                  setManterConectado(e.target.checked)
-                }
-              />
-              <span>Manter conectado</span>
-            </label>
 
             <button
               className="loginButton"
@@ -952,7 +857,7 @@ export default function Home() {
             </button>
 
             <span className="modalLabel">
-              ACESSO DOS CGs
+              ÁREA DA EQUIPE
             </span>
 
             <h2>
@@ -1094,95 +999,48 @@ export default function Home() {
         }
 
         /* =========================
-           DECORAÇÕES
+           DECORAÇÕES EJC
+           Inspiradas diretamente na arte de demonstração:
+           rosa, Nossa Senhora, folhas e curvas douradas.
         ========================= */
 
-        .decor {
+        .ejcDecorations {
           position: absolute;
-          color: rgba(231, 173, 47, .52);
+          inset: 0;
           pointer-events: none;
+          overflow: hidden;
           z-index: 1;
         }
 
-        .decor svg {
-          width: 100%;
-          height: 100%;
-        }
-
-        .decorTopLeft {
-          width: 260px;
-          height: 320px;
-          left: -25px;
-          top: 80px;
-        }
-
-        .decorTopRight {
-          width: 230px;
-          height: 230px;
-          right: -5px;
-          top: 170px;
-        }
-
-        .decorBottomLeft {
-          width: 220px;
-          height: 270px;
-          left: -10px;
-          bottom: 20px;
-        }
-
-        .decorBottomRight {
-          width: 270px;
-          height: 320px;
-          right: -5px;
-          bottom: -15px;
-        }
-
-        .goldStar {
+        .ejcDecor {
           position: absolute;
-          color: var(--gold);
-          font-size: 16px;
-          z-index: 2;
-          opacity: .9;
+          display: block;
+          height: auto;
+          user-select: none;
         }
 
-        .star1 {
-          left: 20%;
-          top: 25%;
+        .ejcDecorTopLeft {
+          width: 300px;
+          left: -18px;
+          top: -10px;
         }
 
-        .star2 {
-          right: 20%;
-          top: 28%;
+        .ejcDecorTopRight {
+          width: 270px;
+          right: -20px;
+          top: 0;
         }
 
-        .star3 {
-          left: 10%;
-          top: 65%;
-          font-size: 12px;
+        .ejcDecorBottomLeft {
+          width: 300px;
+          left: -25px;
+          bottom: -20px;
         }
 
-        .star4 {
-          right: 11%;
-          top: 70%;
-          font-size: 13px;
-        }
-
-        .star5 {
-          left: 50%;
-          bottom: 12%;
-          font-size: 10px;
-        }
-
-        /* =========================
-           CONTEÚDO
-        ========================= */
-
-        .content {
-          position: relative;
-          z-index: 5;
-          width: min(1120px, calc(100% - 50px));
-          margin: 0 auto;
-          padding: 40px 0 60px;
+        .ejcDecorBottomRight {
+          width: 350px;
+          right: -25px;
+          bottom: -20px;
         }
 
         /* =========================
@@ -1812,27 +1670,6 @@ export default function Home() {
           background: white;
         }
 
-        .rememberLogin {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          margin: 1px 0 14px;
-          color: #61758e;
-          font-size: 12px;
-          font-weight: 600;
-          cursor: pointer;
-          user-select: none;
-        }
-
-        .rememberLogin input {
-          width: 15px !important;
-          height: 15px;
-          margin: 0 !important;
-          padding: 0 !important;
-          accent-color: var(--gold);
-          cursor: pointer;
-        }
-
         .loginButton,
         .saveButton {
           width: 100%;
@@ -1915,9 +1752,9 @@ export default function Home() {
             grid-template-columns: repeat(2, 1fr);
           }
 
-          .decorTopLeft,
-          .decorBottomLeft {
-            opacity: .55;
+          .ejcDecorTopLeft,
+          .ejcDecorBottomLeft {
+            opacity: .6;
           }
 
         }
@@ -2020,20 +1857,28 @@ export default function Home() {
             grid-template-columns: 1fr;
           }
 
-          .decorTopLeft {
-            left: -80px;
+          .ejcDecorTopLeft {
+            width: 210px;
+            left: -85px;
+            top: 20px;
           }
 
-          .decorTopRight {
-            right: -90px;
-          }
-
-          .decorBottomLeft {
-            left: -100px;
-          }
-
-          .decorBottomRight {
+          .ejcDecorTopRight {
+            width: 205px;
             right: -100px;
+            top: 5px;
+          }
+
+          .ejcDecorBottomLeft {
+            width: 220px;
+            left: -105px;
+            bottom: -10px;
+          }
+
+          .ejcDecorBottomRight {
+            width: 250px;
+            right: -105px;
+            bottom: -10px;
           }
 
           .formGrid {
