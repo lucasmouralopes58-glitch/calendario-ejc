@@ -591,8 +591,11 @@ export default function Home() {
             <button
               className="outlineButton"
               onClick={compartilharWhatsApp}
+              aria-label="Compartilhar pelo WhatsApp"
             >
-              <span>↗</span>
+              <svg className="buttonIcon whatsappIcon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20.5 3.5A11.8 11.8 0 0 0 12.08 0C5.53 0 .2 5.32.2 11.87c0 2.09.55 4.13 1.6 5.94L.1 24l6.34-1.66a11.9 11.9 0 0 0 5.63 1.43h.01c6.55 0 11.88-5.33 11.88-11.88 0-3.17-1.23-6.14-3.46-8.39ZM12.08 21.72h-.01a9.85 9.85 0 0 1-5.02-1.37l-.36-.21-3.76.98 1-3.67-.23-.38a9.87 9.87 0 1 1 8.38 4.65Zm5.41-7.4c-.3-.15-1.78-.88-2.06-.98-.28-.1-.48-.15-.68.15-.2.3-.78.98-.95 1.18-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.53.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.68-1.64-.93-2.25-.24-.59-.49-.51-.68-.52h-.58c-.2 0-.53.07-.8.38-.28.3-1.05 1.03-1.05 2.51s1.08 2.91 1.23 3.11c.15.2 2.12 3.24 5.13 4.54.72.31 1.28.49 1.72.63.72.23 1.38.2 1.9.12.58-.09 1.78-.73 2.03-1.43.25-.7.25-1.3.18-1.43-.08-.13-.28-.2-.58-.35Z"/>
+              </svg>
               Compartilhar
             </button>
 
@@ -626,8 +629,12 @@ export default function Home() {
               <button
                 className="goldOutlineButton"
                 onClick={() => setMostrarLogin(true)}
+                aria-label="Acessar área dos CGs"
               >
-                <span>♙</span>
+                <svg className="buttonIcon lockIcon" viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="5" y="10" width="14" height="11" rx="2" fill="none" stroke="currentColor" strokeWidth="2"/>
+                  <path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                </svg>
                 Acesso dos CGs
               </button>
             )}
@@ -643,7 +650,13 @@ export default function Home() {
         <div className="topInfoBar">
 
           <div className="infoItem">
-            <span className="infoIcon">◷</span>
+            <span className="infoIcon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <rect x="3.5" y="5" width="17" height="15" rx="3" stroke="currentColor" strokeWidth="1.7"/>
+                <path d="M7.5 3.5v3M16.5 3.5v3M3.5 9.5h17" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"/>
+                <path d="M8 13h3M13 13h3M8 16.5h3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
+            </span>
             <div>
               <small>CALENDÁRIO</small>
               <strong>{meses[mesAtual]} de {anoAtual}</strong>
@@ -653,7 +666,12 @@ export default function Home() {
           <div className="infoDivider" />
 
           <div className="infoItem">
-            <span className="infoIcon">✦</span>
+            <span className="infoIcon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 3.5l1.8 5.7L19.5 11l-5.7 1.8L12 18.5l-1.8-5.7L4.5 11l5.7-1.8L12 3.5Z" fill="currentColor"/>
+                <path d="M18.5 16l.7 2.1 2.1.7-2.1.7-.7 2.1-.7-2.1-2.1-.7 2.1-.7.7-2.1Z" fill="currentColor" opacity=".72"/>
+              </svg>
+            </span>
             <div>
               <small>EVENTOS NO MÊS</small>
               <strong>
@@ -667,7 +685,11 @@ export default function Home() {
           <div className="infoDivider" />
 
           <div className="infoItem">
-            <span className="infoIcon">♡</span>
+            <span className="infoIcon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 20.2S4.5 15.8 4.5 9.7A4.2 4.2 0 0 1 8.7 5.5c1.4 0 2.6.7 3.3 1.8.7-1.1 1.9-1.8 3.3-1.8a4.2 4.2 0 0 1 4.2 4.2c0 6.1-7.5 10.5-7.5 10.5Z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round"/>
+              </svg>
+            </span>
             <div>
               <small>PRÓXIMO</small>
               <strong>
@@ -816,26 +838,6 @@ export default function Home() {
               </div>
 
             </div>
-
-          </div>
-
-          <div className="monthSummary">
-
-            <span>
-              {quantidadeEventos === 0
-                ? "Nenhum compromisso programado"
-                : quantidadeEventos === 1
-                ? "1 compromisso programado"
-                : `${quantidadeEventos} compromissos programados`}
-            </span>
-
-            {eventosHoje.length > 0 && (
-              <span className="todaySummary">
-                ● {eventosHoje.length === 1
-                  ? "1 evento hoje"
-                  : `${eventosHoje.length} eventos hoje`}
-              </span>
-            )}
 
           </div>
 
@@ -1035,44 +1037,7 @@ export default function Home() {
           </section>
         )}
 
-        {/* =========================
-            RODAPÉ
-        ========================= */}
 
-        <footer className="footer">
-
-          <div className="footerDecoration">
-            <span />
-            <b>♡</b>
-            <span />
-          </div>
-
-          <div className="footerBrand">
-            <img
-              src="/logo-ejc.png"
-              alt="EJC"
-            />
-
-            <div>
-              <strong>
-                EJC
-              </strong>
-
-              <span>
-                Encontro de Jovens com Cristo
-              </span>
-            </div>
-          </div>
-
-          <p>
-            Paróquia de Sant’Ana do Barroso
-          </p>
-
-          <small>
-            Calendário oficial de eventos
-          </small>
-
-        </footer>
 
       </div>
 
@@ -1209,7 +1174,10 @@ export default function Home() {
                 className="modalShareButton"
                 onClick={compartilharWhatsApp}
               >
-                ↗ Compartilhar calendário
+                <svg className="buttonIcon whatsappIcon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M20.5 3.5A11.8 11.8 0 0 0 12.08 0C5.53 0 .2 5.32.2 11.87c0 2.09.55 4.13 1.6 5.94L.1 24l6.34-1.66a11.9 11.9 0 0 0 5.63 1.43h.01c6.55 0 11.88-5.33 11.88-11.88 0-3.17-1.23-6.14-3.46-8.39ZM12.08 21.72h-.01a9.85 9.85 0 0 1-5.02-1.37l-.36-.21-3.76.98 1-3.67-.23-.38a9.87 9.87 0 1 1 8.38 4.65Zm5.41-7.4c-.3-.15-1.78-.88-2.06-.98-.28-.1-.48-.15-.68.15-.2.3-.78.98-.95 1.18-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.53.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.68-1.64-.93-2.25-.24-.59-.49-.51-.68-.52h-.58c-.2 0-.53.07-.8.38-.28.3-1.05 1.03-1.05 2.51s1.08 2.91 1.23 3.11c.15.2 2.12 3.24 5.13 4.54.72.31 1.28.49 1.72.63.72.23 1.38.2 1.9.12.58-.09 1.78-.73 2.03-1.43.25-.7.25-1.3.18-1.43-.08-.13-.28-.2-.58-.35Z"/>
+                </svg>
+                Compartilhar calendário
               </button>
             )}
 
@@ -1800,6 +1768,21 @@ export default function Home() {
           align-items: center;
         }
 
+        .buttonIcon {
+          width: 15px;
+          height: 15px;
+          flex: 0 0 15px;
+          display: block;
+        }
+
+        .whatsappIcon {
+          fill: currentColor;
+        }
+
+        .lockIcon {
+          color: currentColor;
+        }
+
         .outlineButton,
         .goldOutlineButton,
         .logoutButton {
@@ -1808,6 +1791,10 @@ export default function Home() {
           font-size: 11px;
           font-weight: 800;
           transition: .2s ease;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 7px;
         }
 
         .outlineButton {
@@ -1901,16 +1888,23 @@ export default function Home() {
         }
 
         .infoIcon {
-          width: 33px;
-          height: 33px;
-          border-radius: 50%;
+          width: 36px;
+          height: 36px;
+          flex: 0 0 36px;
+          border-radius: 12px;
           display: flex;
           align-items: center;
           justify-content: center;
           color: var(--gold);
-          border: 1px solid rgba(231,173,47,.3);
-          background: rgba(231,173,47,.07);
-          font-size: 13px;
+          border: 1px solid rgba(231,173,47,.34);
+          background: linear-gradient(145deg, rgba(231,173,47,.13), rgba(255,255,255,.035));
+          box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+        }
+
+        .infoIcon svg {
+          width: 18px;
+          height: 18px;
+          display: block;
         }
 
         .infoItem div {
@@ -2528,79 +2522,6 @@ export default function Home() {
         }
 
         /* =========================
-           FOOTER
-        ========================= */
-
-        .footer {
-          text-align: center;
-          padding: 55px 0 0;
-        }
-
-        .footerDecoration {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 13px;
-        }
-
-        .footerDecoration span {
-          width: 130px;
-          height: 1px;
-          background: rgba(231,173,47,.3);
-        }
-
-        .footerDecoration b {
-          color: var(--gold);
-          font-size: 17px;
-          font-weight: 400;
-        }
-
-        .footerBrand {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 10px;
-          margin-top: 22px;
-        }
-
-        .footerBrand img {
-          width: 38px;
-          height: 38px;
-          object-fit: contain;
-        }
-
-        .footerBrand div {
-          display: flex;
-          flex-direction: column;
-          text-align: left;
-        }
-
-        .footerBrand strong {
-          color: var(--gold-light);
-          font-family: "Playfair Display", serif;
-          font-size: 20px;
-          font-style: italic;
-        }
-
-        .footerBrand span {
-          color: rgba(255,255,255,.55);
-          font-size: 7px;
-          letter-spacing: 1px;
-        }
-
-        .footer p {
-          margin: 14px 0 3px;
-          font-size: 9px;
-          letter-spacing: 1.5px;
-          font-weight: 800;
-        }
-
-        .footer small {
-          color: rgba(255,255,255,.42);
-          font-size: 8px;
-        }
-
-        /* =========================
            MODAIS
         ========================= */
 
@@ -3142,30 +3063,37 @@ export default function Home() {
 
           .brand {
             width: 100%;
-            gap: 10px;
+            gap: 13px;
+            align-items: center;
           }
 
           .logoArea {
-            width: 74px;
-            min-width: 74px;
+            width: 100px;
+            min-width: 100px;
           }
 
           .logo {
-            width: 74px;
+            width: 100px;
             transform: none;
           }
 
           .brandDivider {
-            height: 70px;
+            height: 82px;
+          }
+
+          .titleArea {
+            min-width: 0;
+            flex: 1;
           }
 
           .smallTitle {
-            font-size: 7px;
-            letter-spacing: 3px;
+            font-size: 7.5px;
+            letter-spacing: 3.2px;
           }
 
           .titleArea h1 {
-            font-size: 45px;
+            font-size: 51px;
+            line-height: .9;
           }
 
           .subtitle {
@@ -3210,9 +3138,15 @@ export default function Home() {
           }
 
           .infoIcon {
-            width: 29px;
-            height: 29px;
-            font-size: 11px;
+            width: 31px;
+            height: 31px;
+            flex-basis: 31px;
+            border-radius: 10px;
+          }
+
+          .infoIcon svg {
+            width: 16px;
+            height: 16px;
           }
 
           .infoItem strong {
@@ -3396,10 +3330,6 @@ export default function Home() {
             width: 100%;
           }
 
-          .footerDecoration span {
-            width: 70px;
-          }
-
           .eventModal,
           .loginModal,
           .formModal {
@@ -3459,16 +3389,19 @@ export default function Home() {
         @media (max-width: 390px) {
 
           .titleArea h1 {
-            font-size: 39px;
+            font-size: 44px;
           }
 
           .logoArea {
-            width: 64px;
-            min-width: 64px;
+            width: 90px;
+            min-width: 90px;
           }
 
           .logo {
-            width: 64px;
+
+          
+          .brand {
+            gap: 10px;
           }
 
           .featuredEvent {
